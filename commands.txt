@@ -1,0 +1,117 @@
+
+npm init -y
+ 
+npm i react react-dom --save
+ 
+npm i --save-dev typescript
+ 
+{
+  "compilerOptions": {
+    "target": "es5",
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"]
+}
+ 
+npm install --save-dev webpack webpack-cli webpack-dev-server
+ 
+ 
+const path = require('path');
+module.exports = {
+  entry: './src/index.tsx',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js']
+  }
+};
+ 
+webpack.config.js
+ 
+const path = require('path');
+ 
+module.exports = {
+    entry: './src/index.tsx',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    },
+};
+ 
+npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/preset-react @babel/preset-typescript
+ 
+ 
+.babelrc  root dizin
+ 
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ]
+}
+ 
+
+webpack.config.js dosyasında babel loader tanımı
+ 
+module: {
+        rules: [
+            {
+                test: /\.(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: 'babel-loader',
+            },
+        ],
+    },
+ 
+
+npm install --save-dev html-webpack-plugin
+
+
+webpack.config.js dosyasına htmlwebpack plugin tanımı yaparız
+ 
+plugins: [new htmlWebpackPlugin({ template: './src/index.html' })],
+ 
+const htmlWebpackPlugin = require('html-webpack-plugin');
+ 
+
+
+index.tsx dosyamızı oluşturduk
+ 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+ 
+const App: React.FC = () => {
+    return <div>Hello, world!</div>;
+};
+ 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+ 
+root.render(<App />);
+ 
+npm i --save-dev @types/react
+ 
+npm i --save-dev @types/react-dom
+ 
+
+package.json dosyası üzerinde ise aşağıdaki scripts node değiştiririz
+ 
+"scripts": {
+  "start": "webpack serve --mode development --open",
+  "build": "webpack --mode production"
+},
+
+
+https://github.com/neominalsolutions/react-webpack-sample
+
+
